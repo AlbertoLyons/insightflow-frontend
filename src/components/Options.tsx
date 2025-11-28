@@ -14,6 +14,8 @@ export default function Options({ workspaceId }: OptionsProps) {
         try {
         await deleteWorkspace(workspaceId);
         console.log(`Workspace with ID ${workspaceId} deleted successfully.`);
+        alert('Espacio de trabajo eliminado con éxito. Refrescando la página.');
+
         router.refresh();
         } catch (error) {
         console.error('Error deleting workspace:', error);

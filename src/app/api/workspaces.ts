@@ -1,4 +1,5 @@
 import { GetWorkspaceByUser } from '@/src/models/GetWorkspaceByUser';
+import { CreateWorkspace } from '@/src/models/CreateWorkspace';
 
 const WORKSPACE_URL = process.env.NEXT_PUBLIC_WORKSPACES_URL;
 
@@ -27,3 +28,24 @@ async function deleteWorkspace(workspaceId: string): Promise<void> {
   return;
 }
 export { deleteWorkspace };
+
+async function createWorkspace(workspace: CreateWorkspace): Promise<void> {
+  const formData = new FormData();
+  formData.append('Name', workspace.name);
+  formData.append('Description', workspace.description);
+  formData.append('Topic', workspace.topic);
+  formData.append('Image', workspace.image[0]);
+  formData.append('OwnerId', workspace.ownerId);
+  formData.append('OwnerName', workspace.ownerName);
+  
+  const response = await fetch(WORKSPACE_URL + 'workspaces', {
+    method: 'POST',
+    body: formData
+  });
+
+  if (!response.ok) {
+    throw new Error('Error creating workspace');
+  }
+  return;
+};
+export { createWorkspace };
