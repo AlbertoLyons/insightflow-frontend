@@ -1,5 +1,5 @@
 import React from 'react';
-import { WorkspacesByUser } from '@/src/models/GetWorkspaceByUser';
+import { WorkspacesByUser } from '@/src/models/workspaces/GetWorkspaceByUser';
 import Card from './Card';
 
 interface BoardProps {
