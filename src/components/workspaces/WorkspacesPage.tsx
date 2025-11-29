@@ -6,32 +6,55 @@ import { getWorkspaceById } from '@/src/app/api/workspaces';
 import Board from '@/src/components/workspaces/Board';
 import WorkspaceById from './WorkspaceById';
 
+/**
+ * Props para el componente WorkspacesPage.
+ */
 type WorkspacesPageProps = { workspaces: GetWorkspaceByUser[] };
+/**
+ * Componente de la página de espacios de trabajo.
+ * @param {WorkspacesPageProps} props - Props del componente que contienen la lista de espacios de trabajo. 
+ * @returns {JSX.Element} Componente de la página de espacios de trabajo.
+ */
 export default function WorkspacesPage({ workspaces }: WorkspacesPageProps) {
+    // Estado para manejar la visibilidad de los modales de búsqueda y resultados
     const [showSearchModal, setShowSearchModal] = useState(false);
     const [showSearchedModal, setShowSearchedModal] = useState(false);
-    // Temporalmente se usa un userId hardcodeado
+    /**
+     * TODO: Temporalmente se usa un userId hardcodeado
+    */
     const userId = "b3850a65-61d9-4417-8b03-de3a700d7064";
     const [userRoleInWorkspace, setUserRoleInWorkspace] = useState("");
     const [workspaceFound, setWorkspaceFound] = useState<any>(null);
-    // Se tiene que reemplazar por obtener el userId del usuario logueado
-
+    /**
+     * TODO: Se tiene que reemplazar por obtener el userId del usuario logueado
+     */
+    // Estado para manejar el campo de entrada del ID del espacio de trabajo
     const [idField, setIdField] = useState('');
+    /**
+     * Función para manejar la búsqueda de un espacio de trabajo por ID.
+     * @param id 
+     * @returns {Promise<void>}
+     */
     async function handleSearchWorkspace(id: string) {
+        // Validar que el campo no esté vacío
         if (id.trim() === '') {
             alert('Por favor, ingrese un ID de espacio de trabajo válido.');
             return;
         }
+        // Intentar obtener el espacio de trabajo por ID
         try {
             const workspace = await getWorkspaceById(id);
+            // Manejar el caso donde no se encuentra el espacio de trabajo
             if (!workspace) {
                 alert('Espacio de trabajo no encontrado.');
                 return;
             }
+            // Formatear la información del espacio de trabajo
             let role = workspace.users.find((u: any) => u.id === userId)?.role;
             if (role === "Owner") {
                 role = "Propietario";
             }
+            // Formatear la fecha de creación al formato "dd/mm/yyyy, hh:mm"
             const formattedDate = new Date(workspace.createdAt).toLocaleString("es-CL", {
                 day: "2-digit",
                 month: "2-digit",
@@ -40,19 +63,24 @@ export default function WorkspacesPage({ workspaces }: WorkspacesPageProps) {
                 minute: "2-digit",
                 hour12: false
             });
+            // Actualizar el estado con la información formateada
             workspace.createdAt = formattedDate;
             setUserRoleInWorkspace(role ?? "");
+            // Filtrar el usuario actual del listado de usuarios para no mostrarlo
             workspace.users = workspace.users.filter((u: any) => u.id !== userId);
+            // Establece el espacio de trabajo encontrado en el estado
             setWorkspaceFound(workspace);
-
+            
         } catch (error) {
             alert('Error al buscar el espacio de trabajo. Por favor, verifique el ID e intente nuevamente.');
             return;
         }
+        // Mostrar el modal de resultados de búsqueda
         setShowSearchedModal(true);
     }
 
     return (
+        // Contenedor principal de la página de espacios de trabajo
         <div style= {{
             backgroundColor: '#f2f6ffff',
             padding: '10px',
@@ -70,11 +98,12 @@ export default function WorkspacesPage({ workspaces }: WorkspacesPageProps) {
             cursor: 'pointer',
             fontWeight: '600',
         }}
+        // Abrir el modal de búsqueda al hacer clic
         onClick={() => setShowSearchModal(true)}
         >
         Buscar espacio de trabajo
         </button>
-
+        {/* Modal de búsqueda de espacio de trabajo */}
         {showSearchModal && (
             <div style={{
                 position: "fixed",
@@ -110,6 +139,7 @@ export default function WorkspacesPage({ workspaces }: WorkspacesPageProps) {
                     }}>
                         <h3 style={{ color: "#001b5aff", fontWeight: 'bold' }}>Buscar espacio de trabajo</h3>
                         <button 
+                        // Cerrar el modal de búsqueda al hacer clic
                         onClick={() => setShowSearchModal(false)}
                         style={{
                         color: "white",
@@ -140,6 +170,7 @@ export default function WorkspacesPage({ workspaces }: WorkspacesPageProps) {
                         </label>
                         <input style= {{ width: '345px', marginLeft: '10px', color: '#001b5aff', padding: '5px', borderRadius: '5px', border: '1px solid #001b5aff' }} 
                             value={idField}
+                            // Actualizar el estado del campo ID al cambiar
                             onChange={(e) => setIdField(e.target.value)}
                         />
                         <button style={{
@@ -152,11 +183,13 @@ export default function WorkspacesPage({ workspaces }: WorkspacesPageProps) {
                             cursor: 'pointer',
                             fontWeight: '600',
                         }}
+                        // Manejar la búsqueda al hacer clic
                         onClick={() => handleSearchWorkspace(idField)}
                         >
                         Buscar
                         </button>
                     </div>
+                    {/* Modal de resultados de búsqueda */}
                     {showSearchedModal && (
                         <div style={{ marginTop: '15px' }}>
                             <h1 style={{ fontWeight: 'bold', fontSize: '24px' }}>Resultados de la búsqueda:</h1>
@@ -167,6 +200,7 @@ export default function WorkspacesPage({ workspaces }: WorkspacesPageProps) {
             </div>
         </div>
         )}
+        {/* Contenedor principal de la página de espacios de trabajo */}
         <Board workspaces={workspaces ?? []} />
         </div>
     );
