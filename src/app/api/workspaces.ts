@@ -1,6 +1,7 @@
 import { GetWorkspaceByUser } from '@/src/models/workspaces/GetWorkspaceByUser';
 import { CreateWorkspace } from '@/src/models/workspaces/CreateWorkspace';
 import { EditWorkspaceModel } from '@/src/models/workspaces/EditWorkspace';
+import { GetWorkspaceById } from '@/src/models/workspaces/GetWorkspaceById';
 
 const WORKSPACE_URL = process.env.NEXT_PUBLIC_WORKSPACES_URL;
 
@@ -68,3 +69,13 @@ async function editWorkspace(workspaceId: string, workspace: EditWorkspaceModel)
   return;
 }
 export { editWorkspace };
+
+async function getWorkspaceById(workspaceId: string): Promise<GetWorkspaceById> {
+  const response = await fetch(WORKSPACE_URL + 'workspaces/' + workspaceId);
+  if (!response.ok) {
+    throw new Error('Error fetching workspace by ID');
+  }
+  const workspace: GetWorkspaceById = await response.json();
+  return workspace;
+}
+export { getWorkspaceById };
