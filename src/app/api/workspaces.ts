@@ -1,6 +1,6 @@
 import { GetWorkspaceByUser } from '@/src/models/workspaces/GetWorkspaceByUser';
 import { CreateWorkspace } from '@/src/models/workspaces/CreateWorkspace';
-import { EditWorkspace } from '@/src/models/workspaces/EditWorkspace';
+import { EditWorkspaceModel } from '@/src/models/workspaces/EditWorkspace';
 
 const WORKSPACE_URL = process.env.NEXT_PUBLIC_WORKSPACES_URL;
 
@@ -51,7 +51,7 @@ async function createWorkspace(workspace: CreateWorkspace): Promise<void> {
 };
 export { createWorkspace };
 
-async function editWorkspace(workspaceId: string, workspace: EditWorkspace): Promise<void> {
+async function editWorkspace(workspaceId: string, workspace: EditWorkspaceModel): Promise<void> {
   const formData = new FormData();
   formData.append('Name', workspace.name);
   if (workspace.image.length > 0) {
