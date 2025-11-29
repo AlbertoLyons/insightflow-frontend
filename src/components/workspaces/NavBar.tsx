@@ -1,14 +1,19 @@
 import Link from 'next/link';
 
+/**
+ * Barra de navegación para la gestión de espacios de trabajo.
+ * @returns {JSX.Element} Componente de la barra de navegación.
+ */
 export default async function NavBar() {
   return (
-      <div style={{ 
-    textAlign: 'center', 
-    padding: '10px', 
-    backgroundColor: '#001b5aff',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between'
+    // Barra de navegación con enlaces a la página de inicio y a la creación de espacios de trabajo
+    <div style={{ 
+      textAlign: 'center', 
+      padding: '10px', 
+      backgroundColor: '#001b5aff',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between'
     }}>
     <h1 style={{ color: 'white', margin: 0, fontSize: 20 }}>Tu listado de espacios</h1>
     <div style={{ 

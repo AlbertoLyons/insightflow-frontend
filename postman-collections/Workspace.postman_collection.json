@@ -1,0 +1,941 @@
+{
+	"info": {
+		"_postman_id": "19b404d5-4d0b-4e56-be2a-a9ace33ec7e5",
+		"name": "Workspace",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34959437",
+		"_collection_link": "https://pm5555-1180.postman.co/workspace/insightflow~6d789187-59c7-4eaf-97a7-31e9f6b95b0a/collection/34959437-19b404d5-4d0b-4e56-be2a-a9ace33ec7e5?action=share&source=collection_link&creator=34959437"
+	},
+	"item": [
+		{
+			"name": "Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "Name",
+							"value": "Taller",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "Taller de trabajo",
+							"type": "text"
+						},
+						{
+							"key": "Topic",
+							"value": "Arquitectura de Sistemas",
+							"type": "text"
+						},
+						{
+							"key": "Image",
+							"type": "file",
+							"src": "/C:/Users/Beto/Downloads/images.png"
+						},
+						{
+							"key": "OwnerId",
+							"value": "ed972f06-315c-4088-81b1-45a22854bd1b",
+							"type": "text"
+						},
+						{
+							"key": "OwnerName",
+							"value": "Alejandra Caraballo",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{URL}}workspaces",
+					"host": [
+						"{{URL}}workspaces"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create 200",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Name",
+									"value": "Taller",
+									"type": "text"
+								},
+								{
+									"key": "Description",
+									"value": "Taller de trabajo",
+									"type": "text"
+								},
+								{
+									"key": "Topic",
+									"value": "Arquitectura de Sistemas",
+									"type": "text"
+								},
+								{
+									"key": "Image",
+									"type": "file",
+									"src": "/C:/Users/Beto/Downloads/images.png"
+								},
+								{
+									"key": "OwnerId",
+									"value": "ed972f06-315c-4088-81b1-45a22854bd1b",
+									"type": "text"
+								},
+								{
+									"key": "OwnerName",
+									"value": "Alejandra Caraballo",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}workspaces",
+							"host": [
+								"{{URL}}workspaces"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 24 Nov 2025 16:56:56 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "9a3a7137bc46e9ae-SCL"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "rndr-id",
+							"value": "63d03109-e09e-423b"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"Taller\",\n    \"description\": \"Taller de trabajo\",\n    \"topic\": \"Arquitectura de Sistemas\",\n    \"image\": {\n        \"contentType\": \"image/png\",\n        \"contentDisposition\": \"form-data; name=\\\"Image\\\"; filename=\\\"images.png\\\"\",\n        \"headers\": {\n            \"Content-Disposition\": [\n                \"form-data; name=\\\"Image\\\"; filename=\\\"images.png\\\"\"\n            ],\n            \"Content-Type\": [\n                \"image/png\"\n            ]\n        },\n        \"length\": 8751,\n        \"name\": \"Image\",\n        \"fileName\": \"images.png\"\n    },\n    \"ownerId\": \"ed972f06-315c-4088-81b1-45a22854bd1b\",\n    \"ownerName\": \"Alejandra Caraballo\"\n}"
+				},
+				{
+					"name": "Create 400 (duplicate name)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Name",
+									"value": "Taller",
+									"type": "text"
+								},
+								{
+									"key": "Description",
+									"value": "Taller de trabajo",
+									"type": "text"
+								},
+								{
+									"key": "Topic",
+									"value": "Arquitectura de Sistemas",
+									"type": "text"
+								},
+								{
+									"key": "Image",
+									"type": "file",
+									"src": "/C:/Users/Beto/Downloads/images.png"
+								},
+								{
+									"key": "OwnerId",
+									"value": "ed972f06-315c-4088-81b1-45a22854bd1b",
+									"type": "text"
+								},
+								{
+									"key": "OwnerName",
+									"value": "Alejandra Caraballo",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}workspaces",
+							"host": [
+								"{{URL}}workspaces"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 24 Nov 2025 16:57:37 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "9a3a7245a8e1e9ae-SCL"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "rndr-id",
+							"value": "f8ea9f55-1937-4ccb"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "Workspace creation failed."
+				}
+			]
+		},
+		{
+			"name": "Get All by user ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}workspaces?userId=3aa533b4-3dbd-4ce1-8f2c-91c24ebe2f6a",
+					"host": [
+						"{{URL}}workspaces"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "3aa533b4-3dbd-4ce1-8f2c-91c24ebe2f6a"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get All by user ID 200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}workspaces?userId=3aa533b4-3dbd-4ce1-8f2c-91c24ebe2f6c",
+							"host": [
+								"{{URL}}workspaces"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "3aa533b4-3dbd-4ce1-8f2c-91c24ebe2f6c"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 24 Nov 2025 16:59:10 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "9a3a748fc9aee9ae-SCL"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "rndr-id",
+							"value": "07a8a807-ce03-4dab"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"f6188afd-4e76-4c95-addd-08f955adeb73\",\n        \"name\": \"Portillo - Carrillo\",\n        \"description\": \"Asperiores et suscipit occaecati.\",\n        \"topic\": \"circuit\",\n        \"imageUrl\": \"https://picsum.photos/640/480/?image=508\",\n        \"users\": [\n            {\n                \"id\": \"3aa533b4-3dbd-4ce1-8f2c-91c24ebe2f6c\",\n                \"name\": \"Maricarmen Munguía\",\n                \"role\": \"Owner\"\n            },\n            {\n                \"id\": \"c73991d9-45ee-4fb7-82fb-63ab192812e3\",\n                \"name\": \"Lucía Galván\",\n                \"role\": \"Owner\"\n            },\n            {\n                \"id\": \"e5d4cfe4-a8be-4ffe-9034-3fea27cb71a0\",\n                \"name\": \"Anita Orozco\",\n                \"role\": \"Owner\"\n            },\n            {\n                \"id\": \"f36329dd-8309-422c-9ff0-02d3835aa374\",\n                \"name\": \"Soledad Jasso\",\n                \"role\": \"Owner\"\n            },\n            {\n                \"id\": \"01cb9562-9e1b-4e8d-ba65-46ef650c119e\",\n                \"name\": \"Clara Garibay\",\n                \"role\": \"Editor\"\n            }\n        ],\n        \"createdAt\": \"2025-11-01T12:07:13.0592696+00:00\",\n        \"isActive\": true\n    }\n]"
+				},
+				{
+					"name": "Get All by user ID 204",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}workspaces?userId=3aa533b4-3dbd-4ce1-8f2c-91c24ebe2f6a",
+							"host": [
+								"{{URL}}workspaces"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "3aa533b4-3dbd-4ce1-8f2c-91c24ebe2f6a"
+								}
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 24 Nov 2025 17:00:45 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Get by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}workspaces/{{WORKSPACE}}",
+					"host": [
+						"{{URL}}workspaces"
+					],
+					"path": [
+						"{{WORKSPACE}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get By ID 200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}workspaces/{{WORKSPACE}}",
+							"host": [
+								"{{URL}}workspaces"
+							],
+							"path": [
+								"{{WORKSPACE}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 24 Nov 2025 16:58:12 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "9a3a7323eb22e9ae-SCL"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "rndr-id",
+							"value": "e033b9d7-1b4a-4698"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"Portillo - Carrillo\",\n    \"url\": \"https://picsum.photos/640/480/?image=508\",\n    \"users\": [\n        {\n            \"id\": \"3aa533b4-3dbd-4ce1-8f2c-91c24ebe2f6c\",\n            \"name\": \"Maricarmen Munguía\",\n            \"role\": \"Owner\"\n        },\n        {\n            \"id\": \"c73991d9-45ee-4fb7-82fb-63ab192812e3\",\n            \"name\": \"Lucía Galván\",\n            \"role\": \"Owner\"\n        },\n        {\n            \"id\": \"e5d4cfe4-a8be-4ffe-9034-3fea27cb71a0\",\n            \"name\": \"Anita Orozco\",\n            \"role\": \"Owner\"\n        },\n        {\n            \"id\": \"f36329dd-8309-422c-9ff0-02d3835aa374\",\n            \"name\": \"Soledad Jasso\",\n            \"role\": \"Owner\"\n        },\n        {\n            \"id\": \"01cb9562-9e1b-4e8d-ba65-46ef650c119e\",\n            \"name\": \"Clara Garibay\",\n            \"role\": \"Editor\"\n        }\n    ],\n    \"createdAt\": \"2025-11-01T12:07:13.0592696+00:00\"\n}"
+				},
+				{
+					"name": "Get By ID 204",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}workspaces/{{WORKSPACE}}",
+							"host": [
+								"{{URL}}workspaces"
+							],
+							"path": [
+								"{{WORKSPACE}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 24 Nov 2025 16:58:26 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "9a3a737d3bf8e9ae-SCL"
+						},
+						{
+							"key": "rndr-id",
+							"value": "36ca52a4-6bd8-4319"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "Name",
+							"value": "Otro nombre de Taller",
+							"type": "text"
+						},
+						{
+							"key": "Image",
+							"type": "file",
+							"src": "/C:/Users/Beto/Downloads/images.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{URL}}workspaces/{{WORKSPACE}}",
+					"host": [
+						"{{URL}}workspaces"
+					],
+					"path": [
+						"{{WORKSPACE}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update 200 (only name)",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Name",
+									"value": "Otro taller",
+									"type": "text"
+								},
+								{
+									"key": "Image",
+									"type": "file",
+									"src": "/C:/Users/Beto/Downloads/610e9adceafddea55ec3cd97db4f8af8.jpg",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}workspaces/{{WORKSPACE}}",
+							"host": [
+								"{{URL}}workspaces"
+							],
+							"path": [
+								"{{WORKSPACE}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 24 Nov 2025 17:01:41 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "9a3a783b1ecbeabb-SCL"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "rndr-id",
+							"value": "740f24ad-45e2-4975"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"Otro taller\",\n    \"image\": null\n}"
+				},
+				{
+					"name": "Update 200 (name and image)",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "Name",
+									"value": "Otro nombre de Taller",
+									"type": "text"
+								},
+								{
+									"key": "Image",
+									"type": "file",
+									"src": "/C:/Users/Beto/Downloads/images.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}workspaces/{{WORKSPACE}}",
+							"host": [
+								"{{URL}}workspaces"
+							],
+							"path": [
+								"{{WORKSPACE}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 24 Nov 2025 17:02:25 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "9a3a79482ea0eabb-SCL"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "rndr-id",
+							"value": "52499182-a361-41c5"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"Otro nombre de Taller\",\n    \"image\": {\n        \"contentType\": \"image/png\",\n        \"contentDisposition\": \"form-data; name=\\\"Image\\\"; filename=\\\"images.png\\\"\",\n        \"headers\": {\n            \"Content-Disposition\": [\n                \"form-data; name=\\\"Image\\\"; filename=\\\"images.png\\\"\"\n            ],\n            \"Content-Type\": [\n                \"image/png\"\n            ]\n        },\n        \"length\": 8751,\n        \"name\": \"Image\",\n        \"fileName\": \"images.png\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}workspaces/{{WORKSPACE}}",
+					"host": [
+						"{{URL}}workspaces"
+					],
+					"path": [
+						"{{WORKSPACE}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete 200",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}workspaces/{{WORKSPACE}}",
+							"host": [
+								"{{URL}}workspaces"
+							],
+							"path": [
+								"{{WORKSPACE}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 24 Nov 2025 17:02:42 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "9a3a79ba9ae9eabb-SCL"
+						},
+						{
+							"key": "rndr-id",
+							"value": "18dd5fb7-55e9-4071"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Delete 400",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}workspaces/{{WORKSPACE}}",
+							"host": [
+								"{{URL}}workspaces"
+							],
+							"path": [
+								"{{WORKSPACE}}"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 24 Nov 2025 17:02:50 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "9a3a79ea8915eabb-SCL"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "rndr-id",
+							"value": "5cb8052c-ec24-4ecd"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "x-render-origin-server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "cf-cache-status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "Workspace deletion failed."
+				}
+			]
+		},
+		{
+			"name": "Get all (only for debug)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}workspaces/all",
+					"host": [
+						"{{URL}}workspaces"
+					],
+					"path": [
+						"all"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

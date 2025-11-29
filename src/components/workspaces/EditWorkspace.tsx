@@ -1,22 +1,33 @@
 "use client";
 import { useState, ChangeEvent } from 'react';
 import { EditWorkspaceModel } from '@/src/models/workspaces/EditWorkspace'; 
-import { useRouter } from "next/navigation";
 import { editWorkspace } from '@/src/app/api/workspaces';
 
+/**
+ * Props para el componente EditWorkspace que representa la edición de un espacio de trabajo.
+ */
 type EditProps = { workspaceId: string, name?: string, imageUrl?: string };
-
+/**
+ * Componente que representa la edición de un espacio de trabajo.
+ * Utiliza el lado del cliente de React.
+ * @param {EditProps} props - Props que contienen el ID, nombre e imagen del espacio de trabajo a editar. 
+ * @returns 
+ */
 export default function EditWorkspace({ workspaceId, name, imageUrl }: EditProps) {
+  // Nombre del espacio de trabajo, obtiene el valor inicial de las props
   const [nameField, setNameField] = useState(name ?? '');
+  // Imagen del espacio de trabajo, obtiene el valor inicial de las props
   const [imageField, setImageField] = useState<File | null>(null);
+  // Vista previa de la imagen, obtiene el valor inicial de las props
   const [preview, setPreview] = useState<string | null>(imageUrl ?? null);
-  const router = useRouter();
-  console.log("Editing workspace with ID:", workspaceId);
-  console.log("Initial name:", name);
-  console.log("Initial imageUrl:", imageUrl);
-  
+  /**
+   * Maneja el cambio en el campo de imagen.
+   * @param e Evento de cambio del input de tipo archivo.
+   */
   const handleImageField = (e: ChangeEvent<HTMLInputElement>) => {
+    // Obtener el archivo seleccionado
     const file = e.target.files?.[0] ?? null;
+    // Si hay un archivo, actualizar el estado y generar una vista previa
     if (file) {
       setImageField(file);
       const reader = new FileReader();
@@ -26,26 +37,34 @@ export default function EditWorkspace({ workspaceId, name, imageUrl }: EditProps
       reader.readAsDataURL(file);
     }
   };
+  /**
+   * Función para subir los cambios del espacio de trabajo editado.
+   * @returns Una promesa que se resuelve cuando la edición se completa.
+   */
   async function uploadEditWorkspace() {
-    if (!imageField && nameField == "") {
-      alert('Por favor, complete alguno de los campos.');
+    // Validar que al menos el campo de nombre esté completo
+    if (nameField == "") {
+      alert('Por favor, complete al menos el campo de nombre.');
       return null;
-    } 
+    }
+    // Crear el objeto de datos del espacio de trabajo editado 
     const workspaceData: EditWorkspaceModel = {
       name: nameField,
       image: imageField ? [imageField] : [],
     };
+    // Intentar editar el espacio de trabajo y manejar errores
     try {
       await editWorkspace(workspaceId, workspaceData);
       alert('Espacio de trabajo modificado');
+      // Recargar la página para reflejar los cambios
       window.location.reload()
     } catch (error) {
-      console.error('Error editing workspace:', error);
       alert('Error al modificar el espacio de trabajo');
     }
   }
 
   return (
+    // Contenedor principal del modal de edición
     <div style={{
         position: "fixed",
         top: 0,
@@ -77,6 +96,7 @@ export default function EditWorkspace({ workspaceId, name, imageUrl }: EditProps
         }}>
             <h3 style={{ color: "#001b5aff", fontWeight: 'bold' }}>Modificar espacio de trabajo</h3>
             <button 
+            // Cerrar el modal recargando la página
             onClick={() => window.location.reload()}
             style={{
             color: "white",
@@ -108,6 +128,7 @@ export default function EditWorkspace({ workspaceId, name, imageUrl }: EditProps
           <input style= {{ marginLeft: '10px', color: '#001b5aff', padding: '5px', borderRadius: '5px', border: '1px solid #001b5aff' }} 
             value={nameField}
             placeholder={name}
+            // Actualizar el estado del nombre al cambiar el input
             onChange={(e) => setNameField(e.target.value)}
           />
         <div className="imageField" style={{
@@ -122,6 +143,7 @@ export default function EditWorkspace({ workspaceId, name, imageUrl }: EditProps
             }}
             type="file"
             accept="image/*"
+            // Actualizar el estado de la imagen al cambiar el input
             onChange={handleImageField}
             id="image-input"
           />
@@ -140,6 +162,7 @@ export default function EditWorkspace({ workspaceId, name, imageUrl }: EditProps
           >
             Seleccionar imagen
           </label>
+          {/* Mostrar la vista previa de la imagen si está disponible */}
           {preview && (
             <img src={preview} alt="Preview" style={{ maxWidth: '100px', marginTop: '30px' }} />
           )}
@@ -157,6 +180,7 @@ export default function EditWorkspace({ workspaceId, name, imageUrl }: EditProps
                   fontSize: "20px",
                   marginBottom: '30px'
               }}
+              // Llamar a la función para subir los cambios al hacer clic
               onClick={() => uploadEditWorkspace()}
               >
               Editar

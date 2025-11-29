@@ -1,20 +1,32 @@
 import { deleteWorkspace } from '../../app/api/workspaces';
-import { useRouter } from "next/navigation";
-  
+/**
+ * Props para el componente DeleteWorkspace que representa la confirmación de eliminación de un espacio de trabajo.
+ */  
 type DeleteProps = { workspaceId: string };
 
+/**
+ * Componente que representa la confirmación de eliminación de un espacio de trabajo.
+ * @param {DeleteProps} props - Props que contienen el ID del espacio de trabajo a eliminar.
+ * @returns {JSX.Element} Elemento JSX que representa la confirmación de eliminación.
+ */
 export default function DeleteWorkspace({ workspaceId }: DeleteProps) {
+    /**
+     * Función para eliminar un espacio de trabajo por su ID.
+     * @param workspaceId ID del espacio de trabajo a eliminar
+     */
     async function deleteWorkspaceById(workspaceId: string) {
+        // Llama a la función de eliminación del espacio de trabajo
         try {
-        await deleteWorkspace(workspaceId);
-        console.log(`Workspace with ID ${workspaceId} deleted successfully.`);
-        alert('Espacio de trabajo eliminado con éxito. Refrescando la página.');
-        window.location.reload();
+            await deleteWorkspace(workspaceId);
+            console.log(`Workspace with ID ${workspaceId} deleted successfully.`);
+            alert('Espacio de trabajo eliminado con éxito. Refrescando la página.');
+            window.location.reload();
         } catch (error) {
-        console.error('Error deleting workspace:', error);
+            console.error('Error deleting workspace:', error);
         }
     }
   return (
+    // Contenido del modal de confirmación
     <div style={{
         position: "fixed",
         top: 0,
@@ -51,6 +63,7 @@ export default function DeleteWorkspace({ workspaceId }: DeleteProps) {
                 borderRadius: "6px",
                 cursor: "pointer"
                 }}
+                // Cierra el modal sin eliminar
                 onClick={() => window.location.reload()}
                 >
                 Cancelar
@@ -64,9 +77,8 @@ export default function DeleteWorkspace({ workspaceId }: DeleteProps) {
                 borderRadius: "6px",
                 cursor: "pointer"
                 }}
-                onClick={() => {
-                deleteWorkspaceById(workspaceId);
-                }}
+                // Llama a la función para eliminar el espacio de trabajo
+                onClick={() => {deleteWorkspaceById(workspaceId);}}
             >
                 Eliminar
             </button>
