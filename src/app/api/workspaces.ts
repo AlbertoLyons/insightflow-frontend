@@ -1,5 +1,6 @@
-import { GetWorkspaceByUser } from '@/src/models/GetWorkspaceByUser';
-import { CreateWorkspace } from '@/src/models/CreateWorkspace';
+import { GetWorkspaceByUser } from '@/src/models/workspaces/GetWorkspaceByUser';
+import { CreateWorkspace } from '@/src/models/workspaces/CreateWorkspace';
+import { EditWorkspace } from '@/src/models/workspaces/EditWorkspace';
 
 const WORKSPACE_URL = process.env.NEXT_PUBLIC_WORKSPACES_URL;
 
@@ -49,3 +50,21 @@ async function createWorkspace(workspace: CreateWorkspace): Promise<void> {
   return;
 };
 export { createWorkspace };
+
+async function editWorkspace(workspaceId: string, workspace: EditWorkspace): Promise<void> {
+  const formData = new FormData();
+  formData.append('Name', workspace.name);
+  if (workspace.image.length > 0) {
+    formData.append('Image', workspace.image[0]);
+  }
+  const response = await fetch(WORKSPACE_URL + 'workspaces/' + workspaceId, {
+    method: 'PATCH',
+    body: formData
+  });
+
+  if (!response.ok) {
+    throw new Error('Error editing workspace');
+  }
+  return;
+}
+export { editWorkspace };

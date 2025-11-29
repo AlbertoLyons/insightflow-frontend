@@ -1,21 +1,23 @@
 "use client";
 
 import React, { useState } from 'react';
-import { deleteWorkspace } from '../app/api/workspaces';
+import { deleteWorkspace } from '../../app/api/workspaces';
 import { useRouter } from "next/navigation";
+import EditWorkspace from '@/src/components/workspaces/EditWorkspace';
 
-type OptionsProps = { workspaceId: string };
+type OptionsProps = { workspaceId: string, name?: string, imageUrl?: string };
 
-export default function Options({ workspaceId }: OptionsProps) { 
+export default function Options({ workspaceId, name, imageUrl }: OptionsProps) { 
     const router = useRouter();
-    const [showModal, setShowModal] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
+
 
     async function deleteWorkspaceById(workspaceId: string) {
         try {
         await deleteWorkspace(workspaceId);
         console.log(`Workspace with ID ${workspaceId} deleted successfully.`);
         alert('Espacio de trabajo eliminado con éxito. Refrescando la página.');
-
         router.refresh();
         } catch (error) {
         console.error('Error deleting workspace:', error);
@@ -36,11 +38,16 @@ export default function Options({ workspaceId }: OptionsProps) {
                     fontWeight: "bold",
                     fontSize: "14px"
                 }}
-                onClick={() => console.log("Editar:", workspaceId)}
+                onClick={() => setShowEditModal(true)}
                 >
                 Editar
                 </button>
             </div>
+            {showEditModal && (
+                <div>
+                    <EditWorkspace workspaceId={workspaceId} name={name} imageUrl={imageUrl} />
+                </div>
+            )}
             <div>
                 <button
                 style={{
@@ -53,12 +60,12 @@ export default function Options({ workspaceId }: OptionsProps) {
                     fontWeight: "bold",
                     fontSize: "14px"
                 }}
-                onClick={() => setShowModal(true)}
+                onClick={() => setShowDeleteModal(true)}
                 >
                 Eliminar
                 </button>
             </div>
-            {showModal && (
+            {showDeleteModal && (
             <div
             style={{
                 position: "fixed",
@@ -88,7 +95,6 @@ export default function Options({ workspaceId }: OptionsProps) {
             >
                 <h3 style={{ color: "red" }}>¿Eliminar espacio de trabajo?</h3>
                 <p>Esta acción no se puede deshacer.</p>
-
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <button
                     style={{
@@ -99,7 +105,7 @@ export default function Options({ workspaceId }: OptionsProps) {
                     borderRadius: "6px",
                     cursor: "pointer"
                     }}
-                    onClick={() => setShowModal(false)}
+                    onClick={() => setShowDeleteModal(false)}
                 >
                     Cancelar
                 </button>
@@ -115,7 +121,7 @@ export default function Options({ workspaceId }: OptionsProps) {
                     }}
                     onClick={() => {
                     deleteWorkspaceById(workspaceId);
-                    setShowModal(false);
+                    setShowDeleteModal(false);
                     }}
                 >
                     Eliminar
