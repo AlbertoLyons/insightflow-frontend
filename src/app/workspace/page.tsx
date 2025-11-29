@@ -1,5 +1,5 @@
-import { GetWorkspaceByUser } from '@/src/models/GetWorkspaceByUser';
-import Board from '@/src/components/Board';
+import { GetWorkspaceByUser } from '@/src/models/workspaces/GetWorkspaceByUser';
+import Board from '@/src/components/workspaces/Board';
 import Link from 'next/link';
 import { getWorkspaces } from '../api/workspaces';
 

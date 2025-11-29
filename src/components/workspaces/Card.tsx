@@ -1,6 +1,6 @@
 import React from 'react';
-import { GetWorkspaceByUser } from '@/src/models/GetWorkspaceByUser';
-import Options from '@/src/components/Options';
+import { GetWorkspaceByUser } from '@/src/models/workspaces/GetWorkspaceByUser';
+import Options from '@/src/components/workspaces/Options';
 
 interface CardProps {
   workspace: GetWorkspaceByUser;
@@ -31,7 +31,7 @@ export default function Card({ workspace }: CardProps) {
       </p>
       <small style={{ color: '#000000ff' }}>ID del espacio: {workspace.id}</small>
       <div>
-        <Options workspaceId={workspace.id} />
+        <Options workspaceId={workspace.id} name={workspace.name} imageUrl={workspace.imageUrl} />
       </div>
     </div>
     

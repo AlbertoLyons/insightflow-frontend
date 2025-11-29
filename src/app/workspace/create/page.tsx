@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { useState, ChangeEvent } from 'react';
 import { createWorkspace } from '../../api/workspaces';
-import { CreateWorkspace } from '@/src/models/CreateWorkspace';
+import { CreateWorkspace } from '@/src/models/workspaces/CreateWorkspace';
 import { useRouter } from "next/navigation";
 
 export default function Navigation() {
@@ -173,7 +173,7 @@ export default function Navigation() {
             Seleccionar imagen
           </label>
           {preview && (
-            <img src={preview} alt="Preview" style={{ maxWidth: '100px' }} />
+            <img src={preview} alt="Preview" style={{ maxWidth: '100px', marginTop: '30px' }} />
           )}
         </div>
         <button
