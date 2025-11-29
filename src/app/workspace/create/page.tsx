@@ -5,20 +5,35 @@ import { createWorkspace } from '../../api/workspaces';
 import { CreateWorkspace } from '@/src/models/workspaces/CreateWorkspace';
 import { useRouter } from "next/navigation";
 
+/**
+ * Componente de la página para crear un espacio de trabajo.
+ * @returns {JSX.Element} Elemento JSX que representa la página para crear un espacio de trabajo.
+ */
 export default function Navigation() {
+  // Estados para los campos del formulario
   const [nameField, setNameField] = useState('');
   const [descriptionField, setDescriptionField] = useState('');
   const [topicField, setTopicField] = useState('');
   const [imageField, setImageField] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
-  // Hardcodeado para pruebas
+  /**
+   * TODO: Reemplazar valores hardcodeados por datos del usuario logueado
+   */
   const ownerName = "Juan Pérez";
   const ownerId = "b3850a65-61d9-4417-8b03-de3a700d7064"; 
-  // Despues se debe de cambiar por el id del usuario logueado
+  /**
+   * TODO: Reemplazar ownerId hardcodeado por el id del usuario logueado
+   */
+  // Hook para la navegación
   const router = useRouter();
-  
+  /**
+   * Función para manejar el cambio en el campo de imagen.
+   * @param e Evento de cambio en el input de tipo archivo
+   */
   const handleImageField = (e: ChangeEvent<HTMLInputElement>) => {
+    // Obtener el archivo seleccionado
     const file = e.target.files?.[0] ?? null;
+    // Si hay un archivo, actualizar el estado y generar una vista previa
     if (file) {
       setImageField(file);
       const reader = new FileReader();
@@ -28,11 +43,17 @@ export default function Navigation() {
       reader.readAsDataURL(file);
     }
   };
+  /**
+   * Función para subir el nuevo espacio de trabajo.
+   * @returns Una promesa que se resuelve cuando la creación se completa.
+   */
   async function uploadWorkspace() {
+    // Validar que todos los campos estén completos
     if (!imageField || nameField == "" || descriptionField == "" || topicField == "") {
       alert('Por favor, complete todos los campos.');
       return null;
     } 
+    // Crear el objeto de datos del nuevo espacio de trabajo
     const workspaceData: CreateWorkspace = {
       name: nameField,
       description: descriptionField,
@@ -41,9 +62,11 @@ export default function Navigation() {
       ownerId: ownerId,
       ownerName: ownerName
     };
+    // Intentar crear el espacio de trabajo y manejar errores
     try {
       await createWorkspace(workspaceData);
       alert('Espacio de trabajo creado con éxito');
+      // Redirigir a la página de espacios de trabajo en caso de éxito
       router.push('/workspace');
     } catch (error) {
       console.error('Error creating workspace:', error);
@@ -52,6 +75,7 @@ export default function Navigation() {
   }
 
   return (
+    // Contenedor principal de la página
     <main style= {{
       backgroundColor: '#fff',
     }}>
@@ -113,6 +137,7 @@ export default function Navigation() {
           </label>
           <input style= {{ marginLeft: '10px', color: '#001b5aff', padding: '5px', borderRadius: '5px', border: '1px solid #001b5aff' }} 
             value={nameField}
+            // Actualizar el estado del campo nombre al cambiar
             onChange={(e) => setNameField(e.target.value)}
           />
         </div>
@@ -126,6 +151,7 @@ export default function Navigation() {
           </label>
           <input style= {{ marginLeft: '10px', color: '#001b5aff', padding: '5px', borderRadius: '5px', border: '1px solid #001b5aff' }} 
             value={descriptionField}
+            // Actualizar el estado del campo descripción al cambiar
             onChange={(e) => setDescriptionField(e.target.value)}
           />
         </div>
@@ -139,6 +165,7 @@ export default function Navigation() {
           </label>
           <input style= {{ marginLeft: '10px', color: '#001b5aff', padding: '5px', borderRadius: '5px', border: '1px solid #001b5aff' }} 
             value={topicField}
+            // Actualizar el estado del campo temática al cambiar
             onChange={(e) => setTopicField(e.target.value)}
           />
         </div>
@@ -154,6 +181,7 @@ export default function Navigation() {
             }}
             type="file"
             accept="image/*"
+            // Actualizar el estado de la imagen al cambiar el input
             onChange={handleImageField}
             id="image-input"
           />
@@ -172,6 +200,7 @@ export default function Navigation() {
           >
             Seleccionar imagen
           </label>
+          {/* Vista previa de la imagen seleccionada */}
           {preview && (
             <img src={preview} alt="Preview" style={{ maxWidth: '100px', marginTop: '30px' }} />
           )}
@@ -189,6 +218,7 @@ export default function Navigation() {
                   fontSize: "20px",
                   marginBottom: '30px'
               }}
+              // Llamar a la función para subir el espacio de trabajo al hacer clic
               onClick={() => uploadWorkspace()}
               >
               Crear espacio de trabajo
