@@ -22,7 +22,7 @@ export default function WorkspacesPage({ workspaces }: WorkspacesPageProps) {
     /**
      * TODO: Temporalmente se usa un userId hardcodeado
     */
-    const userId = "b3850a65-61d9-4417-8b03-de3a700d7064";
+    const userId = "cff73587-b2d5-4c98-9790-8b328ce0fb73";
     const [userRoleInWorkspace, setUserRoleInWorkspace] = useState("");
     const [workspaceFound, setWorkspaceFound] = useState<any>(null);
     /**
