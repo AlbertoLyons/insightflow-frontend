@@ -122,6 +122,11 @@ async function getWorkspaceById(workspaceId: string): Promise<GetWorkspaceById> 
   }
   // Obtener el workspace
   const workspace: GetWorkspaceById = await response.json();
+  for (const user of workspace.users) {
+    if (user.role === 'Owner') {
+      user.role = 'Propietario';
+    }
+  }
   // Devolver el workspace
   return workspace;
 }
