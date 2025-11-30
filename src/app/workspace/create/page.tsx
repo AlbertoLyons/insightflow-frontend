@@ -19,8 +19,8 @@ export default function Navigation() {
   /**
    * TODO: Reemplazar valores hardcodeados por datos del usuario logueado
    */
-  const ownerName = "Juan Pérez";
-  const ownerId = "cff73587-b2d5-4c98-9790-8b328ce0fb73"; 
+  const ownerName = "Carlos Arauco Colque";
+  const ownerId = "a08799f8-746f-46b4-8134-2ef211fe705a"; 
   /**
    * TODO: Reemplazar ownerId hardcodeado por el id del usuario logueado
    */

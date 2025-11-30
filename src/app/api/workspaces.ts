@@ -17,7 +17,7 @@ async function getWorkspaces(): Promise<GetWorkspaceByUser[]> {
   /**
    * TODO: Temporalmente se usa un userId hardcodeado
    */
-  const userId: string = "cff73587-b2d5-4c98-9790-8b328ce0fb73";
+  const userId: string = "a08799f8-746f-46b4-8134-2ef211fe705a";
   /**
    * TODO Se tiene que reemplazar por obtener el userId del usuario logueado
    */
