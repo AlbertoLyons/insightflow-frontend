@@ -1,8 +1,8 @@
 # insight-flow-frontend
-## Proyecto que es está basado en una arquitectura de microservicios.
+Proyecto que utiliza una arquitectura de microservicios en un entorno de Frontend
 ## Para levantar el proyecto se deben seguir lo siguientes pasos:
 
-## Requisitos previos:
+### Requisitos previos:
 - Node JS 22 o superior
 - NextJS 16 o superior
 - Visual Studio Code 1.95.3 o superior
@@ -47,11 +47,13 @@ npm run dev
 
 ## Estructura del repositorio
 - Funciona con la conexión de diferentes microservicios
+- Se encuentra una URL con el proyecto ya desplegado con el siguiente link: https://insightflow-frontend-nine.vercel.app/
 - Se ofrece un .env de con datos de ejemplo
 - Se utiliza el Framework NextJS de Vercel
 - Utiliza un pipeline de CI/CD que construye una imagen en docker, lo envía a docker hub y realiza despliegue automático en Vercel
 - Utiliza endpoints para realizar el CRUD de los módulos
 - Se utiliza la ruta "http://localhost:3000" para visualizar el proyecto y sus uncionalidades
+
 
 # Servicio workspaces-service
 El módulo de espacios de trabajo está definido en el siguiente link:
