@@ -1,6 +1,31 @@
-import type { user, createUser, requestEditUser } from "@/src/models/users";
+import type {
+  user,
+  createUser,
+  requestEditUser,
+  requestLogin,
+} from "@/src/models/users";
 
 const USERS_URL = process.env.NEXT_PUBLIC_USERS_URL;
+
+async function login(requestToLogin: requestLogin): Promise<string> {
+  const formData = new FormData();
+  // Agregar los campos al FormData
+  formData.append("Email", requestToLogin.email);
+  formData.append("Password", requestToLogin.password);
+
+  const response = await fetch(USERS_URL + "login", {
+    method: "POST",
+    body: formData,
+  });
+
+  if (!response.ok) {
+    throw new Error("Error login user");
+  }
+
+  const token: string = await response.json();
+
+  return token;
+}
 
 async function createUser(userToCreate: createUser): Promise<user> {
   const formData = new FormData();
@@ -53,8 +78,14 @@ async function editUser(
   userId: string,
   requestToEditUser: requestEditUser
 ): Promise<user> {
+  const formData = new FormData();
+
+  // Agregar los campos al FormData
+  formData.append("FullName", requestToEditUser.fullName);
+  formData.append("NickName", requestToEditUser.nickName);
   const response = await fetch(USERS_URL + "editUser/" + userId, {
     method: "PUT",
+    body: formData,
   });
 
   if (!response.ok) {

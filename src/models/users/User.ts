@@ -11,6 +11,8 @@ export interface user {
   birthDate: string;
   // Direccion del usuario
   address: string;
+  // Rol de usuario
+  role: string;
   // Numero de telefono del usuario
   phoneNumber: number;
 }
