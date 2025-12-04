@@ -8,14 +8,17 @@ import type {
 const USERS_URL = process.env.NEXT_PUBLIC_USERS_URL;
 
 export async function login(requestToLogin: requestLogin): Promise<string> {
-  const formData = new FormData();
-  // Agregar los campos al FormData
-  formData.append("Email", requestToLogin.email);
-  formData.append("Password", requestToLogin.password);
+  const requestLoginJson = {
+    Email: requestToLogin.email,
+    Password: requestToLogin.password,
+  };
 
   const response = await fetch(USERS_URL + "login", {
     method: "POST",
-    body: formData,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(requestLoginJson),
   });
 
   if (!response.ok) {
@@ -23,7 +26,13 @@ export async function login(requestToLogin: requestLogin): Promise<string> {
     throw new Error(errorText || "Error login user");
   }
 
-  return await response.json();
+  var token = await response.text();
+
+  console.log("Token:" + token);
+
+  localStorage.setItem("token", token);
+
+  return token;
 }
 
 async function createUser(userToCreate: createUser): Promise<user> {
