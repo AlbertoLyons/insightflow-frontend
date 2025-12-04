@@ -7,7 +7,7 @@ import type {
 
 const USERS_URL = process.env.NEXT_PUBLIC_USERS_URL;
 
-async function login(requestToLogin: requestLogin): Promise<string> {
+export async function login(requestToLogin: requestLogin): Promise<string> {
   const formData = new FormData();
   // Agregar los campos al FormData
   formData.append("Email", requestToLogin.email);

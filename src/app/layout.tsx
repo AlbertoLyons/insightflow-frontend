@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { NavegationBar } from "../components/layout/NavegationBar";
 import { Playfair_Display } from "next/font/google";
+import { AppNextAuthProvider } from "../providers/app-next-auth-provider";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -39,10 +40,12 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="font-montserrat antialiased bg-background text-foreground">
-        <NavegationBar />
-        <div className="min-h-screen bg-background overflow-x-hidden flex flex-col">
-          <main className="pt-24 pb-8 flex-1">{children}</main>
-        </div>
+        <AppNextAuthProvider>
+          <NavegationBar />
+          <div className="min-h-screen bg-background overflow-x-hidden flex flex-col">
+            <main className="pt-24 pb-8 flex-1">{children}</main>
+          </div>
+        </AppNextAuthProvider>
       </body>
     </html>
   );
