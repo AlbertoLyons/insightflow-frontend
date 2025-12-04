@@ -1,3 +1,5 @@
-export default async function LoginPage() {
-  return;
+"use client";
+
+export default function LoginPage() {
+  return <div> </div>;
 }

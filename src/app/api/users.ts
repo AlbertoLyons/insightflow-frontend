@@ -19,12 +19,11 @@ export async function login(requestToLogin: requestLogin): Promise<string> {
   });
 
   if (!response.ok) {
-    throw new Error("Error login user");
+    const errorText = await response.text();
+    throw new Error(errorText || "Error login user");
   }
 
-  const token: string = await response.json();
-
-  return token;
+  return await response.json();
 }
 
 async function createUser(userToCreate: createUser): Promise<user> {
