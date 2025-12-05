@@ -1,8 +1,8 @@
 "use client";
-import Link from 'next/link';
-import { useState, ChangeEvent } from 'react';
-import { createWorkspace } from '../../api/workspaces';
-import { CreateWorkspace } from '@/src/models/workspaces/CreateWorkspace';
+import Link from "next/link";
+import { useState, ChangeEvent } from "react";
+import { createWorkspace } from "../../api/workspaces";
+import { CreateWorkspace } from "@/src/models/workspaces/CreateWorkspace";
 import { useRouter } from "next/navigation";
 
 /**
@@ -11,16 +11,16 @@ import { useRouter } from "next/navigation";
  */
 export default function Navigation() {
   // Estados para los campos del formulario
-  const [nameField, setNameField] = useState('');
-  const [descriptionField, setDescriptionField] = useState('');
-  const [topicField, setTopicField] = useState('');
+  const [nameField, setNameField] = useState("");
+  const [descriptionField, setDescriptionField] = useState("");
+  const [topicField, setTopicField] = useState("");
   const [imageField, setImageField] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   /**
    * TODO: Reemplazar valores hardcodeados por datos del usuario logueado
    */
   const ownerName = "Carlos Arauco Colque";
-  const ownerId = "a08799f8-746f-46b4-8134-2ef211fe705a"; 
+  const ownerId = "a08799f8-746f-46b4-8134-2ef211fe705a";
   /**
    * TODO: Reemplazar ownerId hardcodeado por el id del usuario logueado
    */
@@ -49,10 +49,15 @@ export default function Navigation() {
    */
   async function uploadWorkspace() {
     // Validar que todos los campos estén completos
-    if (!imageField || nameField == "" || descriptionField == "" || topicField == "") {
-      alert('Por favor, complete todos los campos.');
+    if (
+      !imageField ||
+      nameField == "" ||
+      descriptionField == "" ||
+      topicField == ""
+    ) {
+      alert("Por favor, complete todos los campos.");
       return null;
-    } 
+    }
     // Crear el objeto de datos del nuevo espacio de trabajo
     const workspaceData: CreateWorkspace = {
       name: nameField,
@@ -60,124 +65,140 @@ export default function Navigation() {
       topic: topicField,
       image: [imageField],
       ownerId: ownerId,
-      ownerName: ownerName
+      ownerName: ownerName,
     };
     // Intentar crear el espacio de trabajo y manejar errores
     try {
       await createWorkspace(workspaceData);
-      alert('Espacio de trabajo creado con éxito');
+      alert("Espacio de trabajo creado con éxito");
       // Redirigir a la página de espacios de trabajo en caso de éxito
-      router.push('/workspace');
+      router.push("/workspace");
     } catch (error) {
-      console.error('Error creating workspace:', error);
-      alert('Error al crear el espacio de trabajo');
+      console.error("Error creating workspace:", error);
+      alert("Error al crear el espacio de trabajo");
     }
   }
 
   return (
     // Contenedor principal de la página
-    <main style= {{
-      backgroundColor: '#fff',
-    }}>
-      <div style={{ 
-        textAlign: 'center', 
-        padding: '10px', 
-        backgroundColor: '#001b5aff',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between'
-      }}>
-        <h1 style={{ color: 'white', margin: 0, fontSize: 20 }}>Crear espacio de trabajo</h1>
-          <div style={{ display: 'flex', gap: '20px', listStyle: 'none', margin: 0, padding: 0 }}>
-            <li>
-              <Link 
-                href="/" 
-                style={{
-                  padding: '10px 20px',
-                  backgroundColor: '#ffffff',
-                  color: '#001b5aff',
-                  textDecoration: 'none',
-                  borderRadius: '5px',
-                  fontWeight: '600',
-                }}
-              >
-                Inicio
-              </Link> 
-            </li>
-            <li>
-              <Link 
-                href="/workspace"
-                style={{
-                  padding: '10px 20px',
-                  backgroundColor: '#ffffff',
-                  color: '#001b5aff',
-                  textDecoration: 'none',
-                  borderRadius: '5px',
-                  fontWeight: '600',
-                  transition: 'all 0.3s'
-                }}
-              >
-                Ver espacios de trabajos
-              </Link> 
-            </li>
-          </div>
-      </div>
-      <div className="fields" style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}>
-        <div className="nameField" style={{
-          display: 'flex',
-          flexDirection: 'column', 
-          alignItems: 'center',
-          }}>
-          <label style= {{ color: "#000000ff", fontStyle: 'bold', marginTop: '20px' }}>
+    <main
+      style={{
+        backgroundColor: "#fff",
+        minHeight: "100vh",
+      }}
+    >
+      <h1
+        style={{
+          textAlign: "center",
+          marginTop: "35px",
+          marginBottom: "10px",
+          color: "#000",
+          fontWeight: "bold",
+          fontSize: "28px",
+        }}
+      >
+        Crear Espacio de Trabajo
+      </h1>
+      <div
+        className="fields"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          marginTop: "15px",
+          alignItems: "center",
+        }}
+      >
+        <div
+          className="nameField"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <label
+            style={{ color: "#000000ff", fontStyle: "bold", marginTop: "20px" }}
+          >
             Nombre
           </label>
-          <input style= {{ marginLeft: '10px', color: '#001b5aff', padding: '5px', borderRadius: '5px', border: '1px solid #001b5aff' }} 
+          <input
+            style={{
+              marginLeft: "10px",
+              color: "#001b5aff",
+              padding: "5px",
+              borderRadius: "5px",
+              border: "1px solid #001b5aff",
+            }}
             value={nameField}
             // Actualizar el estado del campo nombre al cambiar
             onChange={(e) => setNameField(e.target.value)}
           />
         </div>
-        <div className="descriptionField" style={{
-          display: 'flex',
-          flexDirection: 'column', 
-          alignItems: 'center',
-          }}>
-          <label style= {{ color: "#000000ff", fontStyle: 'bold', marginTop: '20px' }}>
+        <div
+          className="descriptionField"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <label
+            style={{ color: "#000000ff", fontStyle: "bold", marginTop: "20px" }}
+          >
             Descripción
           </label>
-          <input style= {{ marginLeft: '10px', color: '#001b5aff', padding: '5px', borderRadius: '5px', border: '1px solid #001b5aff' }} 
+          <input
+            style={{
+              marginLeft: "10px",
+              color: "#001b5aff",
+              padding: "5px",
+              borderRadius: "5px",
+              border: "1px solid #001b5aff",
+            }}
             value={descriptionField}
             // Actualizar el estado del campo descripción al cambiar
             onChange={(e) => setDescriptionField(e.target.value)}
           />
         </div>
-        <div className="topicField" style={{
-          display: 'flex',
-          flexDirection: 'column', 
-          alignItems: 'center',
-          }}>
-          <label style= {{ color: "#000000ff", fontStyle: 'bold', marginTop: '20px' }}>
+        <div
+          className="topicField"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <label
+            style={{ color: "#000000ff", fontStyle: "bold", marginTop: "20px" }}
+          >
             Temática
           </label>
-          <input style= {{ marginLeft: '10px', color: '#001b5aff', padding: '5px', borderRadius: '5px', border: '1px solid #001b5aff' }} 
+          <input
+            style={{
+              marginLeft: "10px",
+              color: "#001b5aff",
+              padding: "5px",
+              borderRadius: "5px",
+              border: "1px solid #001b5aff",
+            }}
             value={topicField}
             // Actualizar el estado del campo temática al cambiar
             onChange={(e) => setTopicField(e.target.value)}
           />
         </div>
-        <div className="imageField" style={{
-          display: 'flex',
-          flexDirection: 'column', 
-          alignItems: 'center',
-          marginTop: '20px'
-          }}>
-          <input style= {{ 
-            marginLeft: '20px', 
-            display: 'none',
+        <div
+          className="imageField"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            marginTop: "20px",
+          }}
+        >
+          <input
+            style={{
+              marginLeft: "20px",
+              display: "none",
             }}
             type="file"
             accept="image/*"
@@ -185,43 +206,47 @@ export default function Navigation() {
             onChange={handleImageField}
             id="image-input"
           />
-          <label 
+          <label
             htmlFor="image-input"
             style={{
-              padding: '10px 20px',
-              backgroundColor: '#427bffff',
-              color: 'white',
-              borderRadius: '5px',
-              cursor: 'pointer',
+              padding: "10px 20px",
+              backgroundColor: "#427bffff",
+              color: "white",
+              borderRadius: "5px",
+              cursor: "pointer",
               fontSize: "16px",
               fontWeight: "bold",
-              border: 'none'
+              border: "none",
             }}
           >
             Seleccionar imagen
           </label>
           {/* Vista previa de la imagen seleccionada */}
           {preview && (
-            <img src={preview} alt="Preview" style={{ maxWidth: '100px', marginTop: '30px' }} />
+            <img
+              src={preview}
+              alt="Preview"
+              style={{ maxWidth: "100px", marginTop: "30px" }}
+            />
           )}
         </div>
         <button
-              style={{
-                  marginTop: '30px',
-                  color: "white",
-                  backgroundColor: "#1f9b00ff", 
-                  padding: "10px 20px",
-                  border: "none",
-                  borderRadius: "6px",
-                  cursor: "pointer",
-                  fontWeight: "bold",
-                  fontSize: "20px",
-                  marginBottom: '30px'
-              }}
-              // Llamar a la función para subir el espacio de trabajo al hacer clic
-              onClick={() => uploadWorkspace()}
-              >
-              Crear espacio de trabajo
+          style={{
+            marginTop: "30px",
+            color: "white",
+            backgroundColor: "#1f9b00ff",
+            padding: "10px 20px",
+            border: "none",
+            borderRadius: "6px",
+            cursor: "pointer",
+            fontWeight: "bold",
+            fontSize: "20px",
+            marginBottom: "30px",
+          }}
+          // Llamar a la función para subir el espacio de trabajo al hacer clic
+          onClick={() => uploadWorkspace()}
+        >
+          Crear espacio de trabajo
         </button>
       </div>
     </main>
