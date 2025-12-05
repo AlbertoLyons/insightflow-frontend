@@ -2,7 +2,14 @@
 
 import { useState } from "react";
 import { login } from "@/src/app/api/users";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import {
+  HiEye,
+  HiEyeOff,
+  HiKey,
+  HiLockClosed,
+  HiOutlineMail,
+} from "react-icons/hi";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -37,20 +44,18 @@ export default function LoginPage() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50 px-4">
-      <div className="w-full max-w-md bg-white shadow-lg rounded-xl p-8 border">
+      <div className="w-full max-w-md bg-white shadow-lg rounded-xl p-8 ">
         <h2 className="text-3xl font-semibold text-center mb-2">
           Iniciar sesión
         </h2>
         <p className="text-center text-gray-600 mb-6">
-          Inicia en tu cuenta para gestionar tareas
+          Inicia sesión en tu cuenta para gestionar tareas
         </p>
 
         <form onSubmit={handleLogin} className="space-y-4">
           {/* Email */}
           <div>
-            <label className="block font-medium mb-1 text-red-600">
-              Correo Electrónico
-            </label>
+            <label className="block font-medium mb-1">Correo Electrónico</label>
             <div className="relative">
               <input
                 type="email"
@@ -59,7 +64,9 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <span className="absolute left-3 top-3.5 text-gray-500">📧</span>
+              <span className="absolute left-3 top-3.5 text-gray-500">
+                <HiOutlineMail className="mt-0.5" />
+              </span>
             </div>
             {email.trim() === "" && (
               <p className="text-sm text-red-600 mt-1">
@@ -79,16 +86,27 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <span className="absolute left-3 top-3.5 text-gray-500">🔒</span>
+              <span className="absolute left-3 top-3.5 text-gray-500">
+                <HiLockClosed className="mt-0.5" />
+              </span>
 
               <button
                 type="button"
                 className="absolute right-3 top-3 text-gray-600"
                 onClick={() => setShowPassword(!showPassword)}
               >
-                {showPassword ? "🙈" : "👁️"}
+                {showPassword ? (
+                  <HiEyeOff className="mt-1" />
+                ) : (
+                  <HiEye className="mt-1" />
+                )}
               </button>
             </div>
+            {password.trim() === "" && (
+              <p className="text-sm text-red-600 mt-1">
+                La contraseña es requerido
+              </p>
+            )}
           </div>
 
           {/* Error */}

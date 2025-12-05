@@ -35,24 +35,28 @@ export async function login(requestToLogin: requestLogin): Promise<string> {
   return token;
 }
 
-async function createUser(userToCreate: createUser): Promise<user> {
-  const formData = new FormData();
-  // Agregar los campos al FormData
-  formData.append("FullName", userToCreate.fullName);
-  formData.append("Email", userToCreate.email);
-  formData.append("NickName", userToCreate.nickName);
-  formData.append("BirthDate", userToCreate.birthDate);
-  formData.append("Address", userToCreate.address);
-  formData.append("PhoneNumber", userToCreate.phoneNumber.toString());
-  formData.append("Password", userToCreate.password);
+export async function createUser(userToCreate: createUser): Promise<user> {
+  const createUserJson = {
+    FullName: userToCreate.fullName,
+    Email: userToCreate.email,
+    NickName: userToCreate.nickName,
+    BirthDate: userToCreate.birthDate,
+    Address: userToCreate.address,
+    PhoneNumber: userToCreate.phoneNumber,
+    Password: userToCreate.password,
+  };
 
   const response = await fetch(USERS_URL + "createUser", {
     method: "POST",
-    body: formData,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(createUserJson),
   });
 
   if (!response.ok) {
-    throw new Error("Error creating user");
+    const errorText = await response.text();
+    throw new Error(errorText || "Error creating user");
   }
 
   const userCreated: user = await response.json();
@@ -60,57 +64,76 @@ async function createUser(userToCreate: createUser): Promise<user> {
   return userCreated;
 }
 
-async function getUsers(): Promise<user[]> {
-  const response = await fetch(USERS_URL + "getUsers");
+export async function getUsers(): Promise<user[]> {
+  const response = await fetch(USERS_URL + "getUsers", {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
 
   if (!response.ok) {
-    throw new Error("Error getting users");
+    const errorText = await response.text();
+    throw new Error(errorText || "Error getting users");
   }
   const users: user[] = await response.json();
 
   return users;
 }
 
-async function getUserById(userId: string): Promise<user> {
-  const response = await fetch(USERS_URL + "getUserById/" + userId);
+export async function getUserById(userId: string): Promise<user> {
+  const response = await fetch(USERS_URL + "getUserById/" + userId, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
 
   if (!response.ok) {
-    throw new Error("Error getting user");
+    const errorText = await response.text();
+    throw new Error(errorText || "Error getting user");
   }
   const userObtained: user = await response.json();
 
   return userObtained;
 }
 
-async function editUser(
+export async function editUser(
   userId: string,
   requestToEditUser: requestEditUser
 ): Promise<user> {
-  const formData = new FormData();
+  const requestEditUserJson = {
+    FullName: requestToEditUser.fullName,
+    NickName: requestToEditUser.nickName,
+  };
 
-  // Agregar los campos al FormData
-  formData.append("FullName", requestToEditUser.fullName);
-  formData.append("NickName", requestToEditUser.nickName);
   const response = await fetch(USERS_URL + "editUser/" + userId, {
     method: "PUT",
-    body: formData,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    body: JSON.stringify(requestEditUserJson),
   });
 
   if (!response.ok) {
-    throw new Error("Error editing user");
+    const errorText = await response.text();
+    throw new Error(errorText || "Error editing user");
   }
   const userEdited: user = await response.json();
 
   return userEdited;
 }
 
-async function deleteUser(userId: string): Promise<user> {
+export async function deleteUser(userId: string): Promise<user> {
   const response = await fetch(USERS_URL + "deleteUser/" + userId, {
     method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
   });
 
   if (!response.ok) {
-    throw new Error("Error deleting user");
+    const errorText = await response.text();
+    throw new Error(errorText || "Error deleting user");
   }
   const userDeleted: user = await response.json();
 
