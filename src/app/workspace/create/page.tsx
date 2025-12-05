@@ -1,9 +1,10 @@
 "use client";
 import Link from "next/link";
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useEffect } from "react";
 import { createWorkspace } from "../../api/workspaces";
 import { CreateWorkspace } from "@/src/models/workspaces/CreateWorkspace";
 import { useRouter } from "next/navigation";
+import { getUserFromToken } from "@/src/utils/auth";
 
 /**
  * Componente de la página para crear un espacio de trabajo.
@@ -16,14 +17,19 @@ export default function Navigation() {
   const [topicField, setTopicField] = useState("");
   const [imageField, setImageField] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
-  /**
-   * TODO: Reemplazar valores hardcodeados por datos del usuario logueado
-   */
-  const ownerName = "Carlos Arauco Colque";
-  const ownerId = "a08799f8-746f-46b4-8134-2ef211fe705a";
-  /**
-   * TODO: Reemplazar ownerId hardcodeado por el id del usuario logueado
-   */
+  const [ownerId, setOwnerId] = useState("");
+  const [ownerName, setOwnerName] = useState("");
+  // Obtener id de usuario y nombre desde el token al montar el componente
+  useEffect(() => {
+    const payload = getUserFromToken();
+    if (!payload) return;
+    const id = payload.nameid;
+    const name = payload.given_name;
+    const idStr = String(id);
+    setOwnerId(idStr);
+    setOwnerName(name);
+  }, []);
+
   // Hook para la navegación
   const router = useRouter();
   /**

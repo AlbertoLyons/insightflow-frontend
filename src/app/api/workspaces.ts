@@ -13,14 +13,8 @@ const WORKSPACE_URL = process.env.NEXT_PUBLIC_WORKSPACES_URL;
  * Función para obtener los workspaces de un usuario.
  * @returns {Promise<GetWorkspaceByUser[]>} - Lista de workspaces del usuario.
  */
-async function getWorkspaces(): Promise<GetWorkspaceByUser[]> {
-  /**
-   * TODO: Temporalmente se usa un userId hardcodeado
-   */
-  const userId: string = "a08799f8-746f-46b4-8134-2ef211fe705a";
-  /**
-   * TODO Se tiene que reemplazar por obtener el userId del usuario logueado
-   */
+async function getWorkspaces(userId: string): Promise<GetWorkspaceByUser[]> {
+  console.log("Fetching workspaces for userId:", userId);
   // Realizar la petición al servicio de workspaces
   const response = await fetch(WORKSPACE_URL + 'workspaces?userId=' + userId);
   // Obtener la lista de workspaces

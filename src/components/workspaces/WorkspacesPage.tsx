@@ -1,35 +1,54 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { GetWorkspaceByUser } from "@/src/models/workspaces/GetWorkspaceByUser";
-import { getWorkspaceById } from "@/src/app/api/workspaces";
+import { getWorkspaceById, getWorkspaces } from "@/src/app/api/workspaces";
 import Board from "@/src/components/workspaces/Board";
 import WorkspaceById from "./WorkspaceById";
+import { getUserFromToken } from "@/src/utils/auth";
 
 /**
  * Props para el componente WorkspacesPage.
  */
-type WorkspacesPageProps = { workspaces: GetWorkspaceByUser[] };
 /**
  * Componente de la página de espacios de trabajo.
- * @param {WorkspacesPageProps} props - Props del componente que contienen la lista de espacios de trabajo.
  * @returns {JSX.Element} Componente de la página de espacios de trabajo.
  */
-export default function WorkspacesPage({ workspaces }: WorkspacesPageProps) {
+export default function WorkspacesPage() {
   // Estado para manejar la visibilidad de los modales de búsqueda y resultados
   const [showSearchModal, setShowSearchModal] = useState(false);
   const [showSearchedModal, setShowSearchedModal] = useState(false);
-  /**
-   * TODO: Temporalmente se usa un userId hardcodeado
-   */
-  const userId = "a08799f8-746f-46b4-8134-2ef211fe705a";
   const [userRoleInWorkspace, setUserRoleInWorkspace] = useState("");
   const [workspaceFound, setWorkspaceFound] = useState<any>(null);
-  /**
-   * TODO: Se tiene que reemplazar por obtener el userId del usuario logueado
-   */
-  // Estado para manejar el campo de entrada del ID del espacio de trabajo
   const [idField, setIdField] = useState("");
+  const [userId, setUserId] = useState("");
+  // Espacios de trabajo
+  const [workspaces, setWorkspaces] = useState<GetWorkspaceByUser[]>([]);
+  // Obtener id de usuario desde el token al montar el componente
+  useEffect(() => {
+    const payload = getUserFromToken();
+    if (!payload) return;
+    const id = payload.nameid;
+    const idStr = String(id);
+    setUserId(idStr);
+  }, []);
+  // UseEffect para obtener los espacios de trabajo cuando el componente se monta o cuando userId cambia 
+  useEffect(() => {
+    if (!userId) return; 
+    
+    const fetchWorkspaces = async () => {
+      try {
+        const fetchedWorkspaces = await getWorkspaces(userId);
+        setWorkspaces(fetchedWorkspaces);
+      } catch (error) {
+        console.error("Error fetching workspaces:", error);
+        setWorkspaces([]);
+      }
+    };
+  
+  fetchWorkspaces();
+}, [userId]); // Se ejecuta cuando userId cambia
+
   /**
    * Función para manejar la búsqueda de un espacio de trabajo por ID.
    * @param id

@@ -15,7 +15,7 @@ interface BoardProps {
 export default function Board({ workspaces }: BoardProps) {
   return (
     // Contenedor principal del tablero
-    <div style={{ display: 'flex', gap: '20px', padding: '20px', overflowX: 'auto', backgroundColor: '#f2f6ffff' }}>
+    <div style={{ display: 'flex', gap: '20px', padding: '20px', overflowX: 'auto' }}>
       <div
         style={{
           maxWidth: "100%",
