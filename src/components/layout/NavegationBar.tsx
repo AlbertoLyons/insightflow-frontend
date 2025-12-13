@@ -8,7 +8,7 @@ import {
   HiUserGroup,
 } from "react-icons/hi";
 
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -32,8 +32,17 @@ export const NavegationBar = () => {
   var userName = "";
   var userEmail = "";
   var userRole = "";
-  const authenticated = isAuthenticated();
-  if (authenticated) {
+
+  const [isAuth, setIsAuth] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    setIsAuth(isAuthenticated());
+  }, []);
+
+  if (!mounted) return null;
+  if (isAuth) {
     userName = getUserFromToken().given_name;
     console.log(userName);
     userEmail = getUserFromToken().email;
@@ -63,7 +72,7 @@ export const NavegationBar = () => {
         </Link>
 
         {/* === MENU PARA USUARIOS AUTENTICADOS === */}
-        {(isHome || isConfig || isUsers) && authenticated && (
+        {(isHome || isConfig || isUsers) && isAuth && (
           <DropdownMenu modal={false}>
             <DropdownMenuTrigger asChild>
               <Button
@@ -123,21 +132,21 @@ export const NavegationBar = () => {
         )}
 
         {/* === MENU EN WORKSPACE === */}
-        {isWorkspace && authenticated && (
+        {isWorkspace && isAuth && (
           <Link href="/workspace/create/">
             <Button variant="outline">Crear espacio de trabajo</Button>
           </Link>
         )}
 
         {/* === MENU EN WORKSPACE CREATE === */}
-        {isWorkspaceCreate && authenticated && (
+        {isWorkspaceCreate && isAuth && (
           <Link href="/workspace/">
             <Button variant="outline">Ver espacios de trabajo</Button>
           </Link>
         )}
 
         {/* === MENU PARA USUARIOS NO AUTENTICADOS === */}
-        {!authenticated && (
+        {!isAuth && (
           <div className="flex items-center space-x-3">
             {/* INICIAR SESIÓN */}
             <Link
