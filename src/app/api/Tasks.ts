@@ -58,7 +58,7 @@ export async function getTaskByDocumentId(documentId: string) : Promise<Response
 
         const data = await response.json();
 
-        return data.Tasks || [];
+        return data.tasks || [];
 
     }catch(error)
     {
