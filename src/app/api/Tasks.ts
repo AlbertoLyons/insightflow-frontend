@@ -3,7 +3,6 @@ import { EditTask,ResponseEditTask } from "@/src/models/task/EditTask";
 import { ResponseGetTask } from "@/src/models/task/GetTask";
 import { ResponseGetTaskByDocument } from "@/src/models/task/GetTaskByDocId";
 import { ToggleTaskResponse } from "@/src/models/task/ToggleTrashCan";
-import { headers } from "next/headers";
 
 const TASKS_URL = process.env.NEXT_PUBLIC_TASKS_URL;
 
