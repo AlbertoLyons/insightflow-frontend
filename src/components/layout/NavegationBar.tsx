@@ -39,7 +39,7 @@ export const NavegationBar = () => {
   useEffect(() => {
     setMounted(true);
     setIsAuth(isAuthenticated());
-  }, []);
+  }, [pathname]);
 
   if (!mounted) return null;
   if (isAuth) {
