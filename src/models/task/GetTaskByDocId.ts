@@ -6,4 +6,5 @@ export interface ResponseGetTaskByDocument{
     title: string;
     state: TaskState;       
     expirationDate: string; 
+    isActive: boolean;
 }

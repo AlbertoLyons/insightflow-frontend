@@ -6,5 +6,6 @@ export interface ResponseGetTask{
     completeDescription?: string; 
     state: TaskState;            
     expirationDate: string;      
-    comments?: string;           
+    comments?: string;      
+    isActive: boolean;     
 }
