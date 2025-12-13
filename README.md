@@ -1,72 +1,135 @@
-# insight-flow-frontend
-Proyecto que utiliza una arquitectura de microservicios en un entorno de Frontend
-## Para levantar el proyecto se deben seguir lo siguientes pasos:
+# Insightflow - Frontend
 
-### Requisitos previos:
-- Node JS 22 o superior
-- NextJS 16 o superior
-- Visual Studio Code 1.95.3 o superior
+Frontend de la plataforma **Insightflow**, que permite organizar notas, espacios de trabajo y tareas. Forma parte de una arquitectura de **microservicios**, consumiendo los servicios de Users, Workspaces, Documents y Tasks.
 
-## Instalación
-1.- Primero debemos abrir la consola de comandos apretando las siguientes teclas y escribir 'cmd':
+Este proyecto se centra en mostrar y gestionar la información de los usuarios y espacios de trabajo a través de la UI, comunicándose con los microservicios vía HTTP.
 
-- "Windows + R" y escribimos 'cmd'
+---
 
-2.- Ahora debemos crear una carpeta en donde guardar el proyecto, esta carpeta puede estar donde desee el usuario:
-```bash
-mkdir [NombreDeCarpeta]
+## Arquitectura y Patrón de Diseño
+
+### Arquitectura: Microservicios
+
+El frontend implementa:
+
+- Arquitectura de capas (Layered Architecture)
+- Comunicación **síncrona** mediante **HTTP**
+- Gestión de rutas y páginas mediante **NextJS**
+
+```mermaid
+flowchart TD
+    A[Usuario]
+
+    subgraph Frontend
+        B1[Navbar]
+        B2[Pages]
+        B3[Components]
+        B4[Services Http]
+    end
+
+    subgraph Microservices
+        C1[Users Service]
+        C2[Workspaces Service]
+        C3[Documents Service]
+        C4[Tasks Service]
+    end
+
+    A --> B1
+    A --> B2
+    B2 --> B3
+    B2 --> B4
+    B4 --> C1
+    B4 --> C2
+    B4 --> C3
+    B4 --> C4
 ```
-3.- Accedemoss a la carpeta.
-```bash
-cd NombreDeCarpeta
-```
-4.- Se debe clonar el repositorio en el lugar deseado por el usuario con el siguiente comando:
+
+### Patrones de Diseño Implementados
+
+1. **Component-Based Architecture:** Separación de UI en componentes reutilizables
+2. **Service Layer:** Abstracción de llamadas HTTP a los microservicios
+3. **Routing con NextJS:** Gestión de rutas y navegación.
+
+## Tecnologías Utilizadas
+
+- **Framework:** NextJS 16+
+- **Contenedores:** Docker
+- **Comunicación con microservicios:** HTTP
+- **Versionado:** Git + Conventional Commits
+- **CI/CD:** Github Actions
+
+## Estructura del Proyecto
+
+- **app/:** Páginas de la aplicación NextJS
+- **app/api:** Clases para llamadas a los microservicios
+- **components/:** Componentes reutilizables de UI
+- **libs/:** Utilidades de TailwindCSS
+- **models/:** Modelos TypeScript de los servicios
+- **utils/:** Funciones auxiliares
+
+## Instalación y Configuración Local
+
+### Requisitos previos
+
+- **NodeJS 22 o superior**: [Download](https://nodejs.org/en)
+- **Visual Studio Code**: [Download](https://code.visualstudio.com/)
+
+### 1. Clonar el Repositorio
+
 ```bash
 git clone https://github.com/AlbertoLyons/insightflow-frontend.git
-```
-5.- Accedemos a la carpeta creada por el repositorio:
-```bash
+
 cd insightflow-frontend
 ```
-6.- Ahora debemos restaurar las dependencias del proyecto con el siguiente comando:
+
+### 2. Establecer las variables de entorno
+
+Crear un archivo llamado **.env**, y pegar el siguiente contenido:
+
+```bash
+NEXT_PUBLIC_USERS_URL=https://users-service-x9p9.onrender.com/
+NEXT_PUBLIC_WORKSPACES_URL=https://workspace-service-app.onrender.com/api/
+NEXT_PUBLIC_DOCUMENTS_URL=your_documents_service_url_here/api/
+NEXT_PUBLIC_TASKS_URL=https://task-service-api.onrender.com
+```
+
+### 3. Instalar Dependencias
+
 ```bash
 npm install
 ```
-7.- Con las dependencias restauradas, abrimos el editor:
-```bash
-code .
-```
-8.- Establecer las credenciales del archivo .env
-```bash
-notepad .env
-```
-9.- Finalmente ya en el editor ejecutamos el siguiente comando para ejecutar el proyecto:
+
+### 4. Ejecutar el Proyecto
+
 ```bash
 npm run dev
 ```
 
-## Estructura del repositorio
-- Funciona con la conexión de diferentes microservicios
-- Se encuentra una URL con el proyecto ya desplegado con el siguiente link: https://insightflow-frontend-nine.vercel.app/
-- Se ofrece un .env de con datos de ejemplo
-- Se utiliza el Framework NextJS de Vercel
-- Utiliza un pipeline de CI/CD que construye una imagen en docker, lo envía a docker hub y realiza despliegue automático en Vercel
-- Utiliza endpoints para realizar el CRUD de los módulos
-- Se utiliza la ruta "http://localhost:3000" para visualizar el proyecto y sus uncionalidades
+El servicio estará disponible en: http://localhost:3000
 
+## Servicio desplegado
 
-# Servicio workspaces-service
+**Frontend**: https://insightflow-frontend-nine.vercel.app/
+
+## Servicio workspaces-service
+
 El módulo de espacios de trabajo está definido en el siguiente link:
+
 ```bash
 https://workspace-service-app.onrender.com/api/
 ```
+
 Las consultas disponibles en el módulo son las siguientes (Se adjunta una colección de postman en el repositorio para un mayor entendimiento.):
 [Colección de postman del módulo routes](./postman-collections/Workspace.postman_collection.json)
+
 ### Crear espacio de trabajo (Metodo POST)
+
 ```bash
 https://workspace-service-app.onrender.com/api/workspaces
 ```
+
 Este metodo permite crear un nuevo espacio de trabajo dando los siguientes parametros en el body como un form data:
+
 - Name: Nombre del espacio del trabajo
 - Description: Descripción del espacio de trabajo
 - Topic: Temática
@@ -75,35 +138,40 @@ Este metodo permite crear un nuevo espacio de trabajo dando los siguientes param
 - OwnerName: Nombre del usuario que creara el espacio
 
 ### Obtener espacios de trabajo por usuario (Metodo GET)
+
 ```bash
 https://workspace-service-app.onrender.com/api/workspaces?userId=id
 ```
+
 Este metodo permite obtener todos los espacios de trabajo en el que un usuario esté asignado sea propietario o editor
 
 ### Obtener espacio de trabajo por id (Metodo GET)
+
 ```bash
 https://workspace-service-app.onrender.com/api/workspaces/{id}
 ```
+
 Este metodo permite obtener una un espacio de trabajo por su id
 
 ### Actualizar espacio de trabajo (Metodo PATCH)
+
 ```bash
 https://workspace-service-app.onrender.com/api/workspaces/{id}
 ```
+
 Este metodo permite editar un espacio de trabajo dando como párametro en la ruta su id. Los párametros que deben de ir en el body como form data son los siguientes:
+
 - Name: Nombre a modificar del espacio de trabajo
-- Image: Ícono a asignar para el espacio. Debe de ser un archivo .png o .jpg (Parámetro opcional) 
+- Image: Ícono a asignar para el espacio. Debe de ser un archivo .png o .jpg (Parámetro opcional)
 
 Esta ruta está protegida por autenticación, en la que solo el propietario del espacio de trabajo puede usar.
 
 ### Eliminar ruta (Metodo DELETE)
+
 ```bash
 https://workspace-service-app.onrender.com/api/workspaces/{id}
 ```
+
 Este metodo permite la eliminación de un espacio de trabajo mediante el uso de soft delete. Se debe de dar la id del espacio de trabajo como párametro en la ruta.
 
 Esta ruta está protegida por autenticación, en la que solo el propietario del espacio de trabajo puede usar.
-
-# Servicio users-service
-# Servicio documents-service
-# Servicio tasks-service
