@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import TaskCard from '@/src/components/task/TaskDocumentCard';
 import CreateTaskModal from '@/src/components/task/CreateTaskForm';
 import { ResponseGetTaskByDocument } from '@/src/models/task/GetTaskByDocId'; 
-import { getTaskByDocumentId, editTask, toggleTrashCan } from '../api/Tasks'; 
+import { getTaskByDocumentId, editTask, toggleTrashCan } from '../../api/Tasks'; 
 import { TaskState } from '@/src/models/task/CreateTask';
 
 export default function TasksPage() {
@@ -43,6 +43,10 @@ export default function TasksPage() {
 
     // Handlers para Drag and Drop
     const handleDragStart = (task: ResponseGetTaskByDocument) => {
+        // No permitir drag si hay modal abierto
+        if (isModalOpen || isTrashOpen) {
+            return;
+        }
         setDraggedTask(task);
     };
 
@@ -270,6 +274,7 @@ export default function TasksPage() {
                 />
             )}
 
+
             <CreateTaskModal
                 isOpen={isModalOpen}
                 onClose={handleCloseModal}
@@ -303,12 +308,12 @@ export default function TasksPage() {
                             pendingTasks.map(task => (
                                 <div
                                     key={task.id}
-                                    draggable
+                                    draggable={!isModalOpen && !isTrashOpen}
                                     onDragStart={() => handleDragStart(task)}
                                     onDragEnd={handleDragEnd}
                                     className="cursor-move"
                                 >
-                                    <TaskCard task={task} />
+                                    <TaskCard task={task} onTaskUpdated={fetchTasks} />
                                 </div>
                             ))
                         )}
@@ -339,12 +344,12 @@ export default function TasksPage() {
                             inProgressTasks.map(task => (
                                 <div
                                     key={task.id}
-                                    draggable
+                                    draggable={!isModalOpen && !isTrashOpen}
                                     onDragStart={() => handleDragStart(task)}
                                     onDragEnd={handleDragEnd}
                                     className="cursor-move"
                                 >
-                                    <TaskCard task={task} />
+                                    <TaskCard task={task} onTaskUpdated={fetchTasks} />
                                 </div>
                             ))
                         )}
@@ -375,12 +380,12 @@ export default function TasksPage() {
                             completedTasks.map(task => (
                                 <div
                                     key={task.id}
-                                    draggable
+                                    draggable={!isModalOpen && !isTrashOpen}
                                     onDragStart={() => handleDragStart(task)}
                                     onDragEnd={handleDragEnd}
                                     className="cursor-move"
                                 >
-                                    <TaskCard task={task} />
+                                    <TaskCard task={task} onTaskUpdated={fetchTasks} />
                                 </div>
                             ))
                         )}

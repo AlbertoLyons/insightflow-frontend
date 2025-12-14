@@ -5,7 +5,7 @@ import TaskDetailsModal from './TaskCardById';
 
 interface Props {
     task: ResponseGetTaskByDocument;
-    onTaskUpdated?: () => void; 
+    onTaskUpdated: () => void; 
 }
 
 export default function TaskCard({ task, onTaskUpdated }: Props) {
@@ -99,7 +99,7 @@ export default function TaskCard({ task, onTaskUpdated }: Props) {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
                         <span className="text-sm text-gray-700">
-                            <span className="font-medium">Vencimiento:</span> {task.expirationDate}
+                            <span className="font-medium">Fecha de Finalizacion:</span> {task.expirationDate}
                         </span>
                     </div>
 

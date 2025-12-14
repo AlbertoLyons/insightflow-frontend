@@ -56,7 +56,6 @@ export default function TaskDetailsModal({ taskId, isOpen, onClose, onSuccess }:
             const user = await getUserById(taskData.userId);
             setUserName(user.fullName || 'Usuario desconocido');
 
-            // Inicializar form data
             const [day, month, year] = taskData.expirationDate.split('/');
             setFormData({
                 title: taskData.title,
@@ -330,7 +329,7 @@ export default function TaskDetailsModal({ taskId, isOpen, onClose, onSuccess }:
                                     </div>
 
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">Vencimiento</label>
+                                        <label className="block text-sm font-medium text-gray-700 mb-2">Fecha de Finalizacion</label>
                                         {isEditing ? (
                                             <input 
                                                 type="date" 
