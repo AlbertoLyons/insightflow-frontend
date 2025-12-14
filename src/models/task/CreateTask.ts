@@ -1,21 +1,52 @@
+//Tipos permitidos para el estado de tarea.
 export type TaskState = 'Pendiente' | 'En Progreso' | 'Completado';
 
+/**
+ * Interfaz para la creacion de una tarea
+ */
 export interface CreateTask {
-    documentId: string;       
+    //Id de documento
+    documentId: string;
+    
+    //Id de usuario responsable.
     userId: string;           
+
+    //Titulo de Tarea
     title: string;
-    completeDescription?: string; 
-    state: TaskState;         
+
+    //Descripcion de tarea.
+    completeDescription?: string;
+    
+    //Estado de tarea
+    state: TaskState;
+    
+    //Fecha de finalizacion de tarea
     expirationDate: string;   
 }
 
 
+/**
+ * Interfaz de respuesta de una craacion de tarea
+ */
 export interface ResponseCreateTask {
-    id: string;               
+    //Id de tarea
+    id: string;
+    
+    //Id de documento
     documentId: string;
+
+    //Id de usuario responsable
     userId: string;
+
+    //Titulo de tarea
     title: string;
+
+    //Descipcion de tarea
     completeDescription?: string;
-    state: TaskState;         
+
+    //Estado de tarea
+    state: TaskState;
+    
+    //Fecha de finalizacion de tarea
     expirationDate: string;
 }
