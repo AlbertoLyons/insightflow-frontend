@@ -1,4 +1,4 @@
-const DOC_URL = "http://localhost:5232";
+const DOC_URL = "http://localhost:5232/document";
 
 import { DocumentDto, CreateDocument, UpdateDocument } from "@/src/models/documents";
 
@@ -15,8 +15,8 @@ export async function createDocument(data: CreateDocument): Promise<Document> {
 }
 
 // Obtener uno
-export async function getDocument(id: string): Promise<Document> {
-  const res = await fetch(`${DOC_URL}/document/${id}`);
+export async function getDocumentById(id: string) {
+  const res = await fetch(`${DOC_URL}/documents/${id}`);
   if (!res.ok) throw new Error("Document not found");
   return res.json();
 }
