@@ -6,9 +6,12 @@ import CreateTaskModal from '@/src/components/task/CreateTaskForm';
 import { ResponseGetTaskByDocument } from '@/src/models/task/GetTaskByDocId'; 
 import { getTaskByDocumentId, editTask, toggleTrashCan } from '../../api/Tasks'; 
 import { TaskState } from '@/src/models/task/CreateTask';
+import { useParams } from 'next/navigation';
 
 export default function TasksPage() {
-    const documentId = "11111111-1111-1111-1111-111111111111"; 
+    
+    const params = useParams();
+    const documentId = params.documentId as string;
     
     const [tasks, setTasks] = useState<ResponseGetTaskByDocument[]>([]);
     const [isLoading, setIsLoading] = useState(true);
