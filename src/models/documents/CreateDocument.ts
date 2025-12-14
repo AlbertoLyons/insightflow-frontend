@@ -1,4 +1,6 @@
 export interface CreateDocument {
-  name: string;
+  title: string;
+  icon?: string;
+  contentJson: string;
   workspaceId: string;
 }
