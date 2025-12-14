@@ -1,6 +1,6 @@
 const DOC_URL = "http://localhost:5232/document";
 
-import { DocumentDto, CreateDocument, UpdateDocument } from "@/src/models/documents";
+import { DocumentDto, CreateDocument, UpdateDocument, UpdateDocumentMetadata } from "@/src/models/documents";
 
 // Crear documento
 export async function createDocument(data: CreateDocument): Promise<Document> {
@@ -14,7 +14,7 @@ export async function createDocument(data: CreateDocument): Promise<Document> {
   return res.json();
 }
 
-// Obtener uno
+// Obtener un documento
 export async function getDocumentById(id: string) {
   const res = await fetch(`${DOC_URL}/documents/${id}`);
   if (!res.ok) throw new Error("Document not found");
@@ -38,6 +38,18 @@ export async function updateDocumentContent(id: string, data: UpdateDocument): P
 
   if (!res.ok) throw new Error("Error updating");
 
+  return res.json();
+}
+
+// Editar solo metadatos (titulo y icono)
+export async function updateDocumentMetadata(id: string, data: UpdateDocumentMetadata): Promise<DocumentDto> {
+  const res = await fetch(`${DOC_URL}/${id}/metadata`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
+
+  if (!res.ok) throw new Error("Error updating metadata");
   return res.json();
 }
 
