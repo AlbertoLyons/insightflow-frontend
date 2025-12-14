@@ -22,7 +22,7 @@ export async function getDocumentById(id: string) {
 }
 
 // Obtener documentos por workspace
-export async function getDocumentsByWorkspace(workspaceId: string): Promise<Document[]> {
+export async function getDocumentsByWorkspace(workspaceId: string): Promise<DocumentDto[]> {
   const res = await fetch(`${DOC_URL}/document/workspace/${workspaceId}`);
   if (!res.ok) throw new Error("Error loading documents");
   return res.json();
