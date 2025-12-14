@@ -175,3 +175,52 @@ https://workspace-service-app.onrender.com/api/workspaces/{id}
 Este metodo permite la eliminación de un espacio de trabajo mediante el uso de soft delete. Se debe de dar la id del espacio de trabajo como párametro en la ruta.
 
 Esta ruta está protegida por autenticación, en la que solo el propietario del espacio de trabajo puede usar.
+
+## Servicio Task-Service
+
+El **Task-Service** es el microservicio encargado de la gestión de tareas dentro de la plataforma **InsightFlow**. 
+
+```bash
+https://task-service-api.onrender.com
+```
+
+Métodos Disponibles:
+
+## Crear Tarea (POST) ##
+
+Permite la creación de una nueva tarea asociada a un documento específico.
+
+## Editar Tarea (PUT) ##
+
+Permite la edicion de una tarea existente en el documento. En **Insightflow - Frontend** la edicion se puede llevar a cabo de las siguientes maneras:
+
+- **Edicion de Atributos por Formulario:** Permite modificar los siguientes campos atraves de un formulario:
+    - Titulo.
+    - Descripción.
+    - Reponsable.
+    - Comentarios
+    - Fecha de Finalización.
+
+- **Edicion de Estado Drag and Drop:** Este tipo de edicion soporta:
+    - Cambio de estado de la tarea.
+    - Envió a papelera (Implementado como Soft Delete)
+
+## Visualizacion de Tareas por Documento (GET) ##
+
+Permite visualizar las tareas asociadas a un documento. Las Tareas se agrupan e columnas segun su estado.
+- Pendiente
+- En Progeso
+- Completado
+
+## Visualizar Detalles ed una Tarea (GET) ##
+
+Permite visualizar los detalles de una tarea, incluyendo:
+- Descripción
+- Comentarios
+
+## Mover/recuperar de papelera (PATCH) ##
+
+Implementado como Sof Delete, permite enviar tareas a la papelera mediante drag and drop, ademas de poder recuperar tareas eliminadas.
+
+
+Para obtener más información sobre la implementación de  **servicio de Tareas** visita el repositorio [TaskService](https://github.com/InsightFlowDevelopmentTeam/insightflow-task-service.git)
