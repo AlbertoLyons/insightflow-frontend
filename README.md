@@ -224,3 +224,40 @@ Implementado como Sof Delete, permite enviar tareas a la papelera mediante drag 
 
 
 Para obtener más información sobre la implementación de  **servicio de Tareas** visita el repositorio [TaskService](https://github.com/InsightFlowDevelopmentTeam/insightflow-task-service.git)
+
+## Servicio documents-service
+
+Las consultas disponibles en el módulo son las siguientes 
+### Crear documento (Metodo POST)
+
+Este metodo permite crear un nuevo documento dando los siguientes parametros en el body como un form data:
+
+- Title: Titulo de documento a crear.
+- contentJson: Documento Json con informacion del documento.
+- icon: Ícono a asignar para el documento. Debe de ser un archivo .png o .jpg
+- OwnerId: ID del usuario que creará el documento
+
+### Obtener docuemnto por id de espacio de trabajo (Metodo GET)
+
+Este metodo permite obtener todos los documentos por medio de un id de espacios de trabajo.
+
+### Obtener documento por id (Metodo GET)
+
+Este metodo permite obtener un documento, ingresando su id en la ruta.
+
+### Actualizar documento (Metodo PUT)
+
+Este metodo permite editar un documento existente dando como párametro en la ruta su id. Los párametros que deben de ir en el body como form data son los siguientes:
+
+- title: Titulo a modificar del espacio de trabajo
+- icon: Ícono a asignar para el espacio. Debe de ser un archivo .png o .jpg (Parámetro opcional)
+- contentJson: documento Json a modificar
+
+Esta ruta está protegida por autenticación, en la que solo el propietario del espacio de trabajo puede usar.
+
+### Eliminar documento (Metodo DELETE)
+
+Este metodo permite la desactivación de un documento existente mediante el uso de soft delete. Se debe de dar la id del documento como párametro en la ruta.
+
+Esta ruta está protegida por autenticación, en la que solo el propietario del espacio de trabajo puede usar.
+
